@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header>
+      <div class="header-container">
+        <img class="logo" src="assets/logo.svg" alt="Logo" />
+        <img src="assets/title.svg" alt="App Name" />
+      </div>
+    </header>
+
+    <!-- MAIN -->
+    <main>
+      <article class="todo-checked">
+        <div class="todo-icon">
+          <img src="assets/checkmark.svg" alt="Checkmark" />
+        </div>
+        <div class="todo-description">
+          This is an item
+        </div>
+        <div class="trash-icon">
+          <img src="assets/trash.svg" alt="Checkmark" />
+        </div>
+      </article>
+      <article class="todo-unchecked">
+        <div class="todo-icon">
+          <img src="assets/checkmark.svg" alt="Checkmark" />
+        </div>
+        <div class="todo-description">This is an item</div>
+      </article>
+    </main>
+
+    <!-- ADD BUTTON -->
+    <button class="add-todo">
+      <img src="assets/plus.svg" alt="Checkmark" />
+    </button>
+
+    <!-- OVERLAY -->
+    <div class="overlay-background hide">
+      <div class="overlay">
+        <button class="cancel-overlay">
+          <img src="assets/minus.svg" alt="Checkmark" />
+        </button>
+        <div class="overlay-form">
+          <label for="overlay-input">Description</label>
+          <textarea name="overlay-input" id="overlay-input" rows="3"></textarea>
+          <button class="submit-overlay">Save</button>
+        </div>
+      </div>
+    </div>
+    <script></script>
+  </body>
+</html>
