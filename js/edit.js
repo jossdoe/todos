@@ -27,6 +27,9 @@ function toggleEditMode(textElement) {
   const editField = document.createElement('input');
   editField.type = 'text';
   editField.value = description;
+  editField.addEventListener('keydown', (e) => {
+    if (e.code === 'Enter') saveEdit(todoElement);
+  });
 
   const saveButton = document.createElement('button');
   saveButton.innerHTML = 'Save';
