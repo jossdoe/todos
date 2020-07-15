@@ -16,10 +16,13 @@ document.querySelectorAll('div.todo-icon').forEach((el) => {
   el.addEventListener('click', () => toggleChecked(el));
 });
 
-// Replace content of Todo-element with field & button
+// Edit mode: Replace content of Todo-element with field & button
 function toggleEditMode(textElement) {
-  const description = textElement.innerHTML;
   const todoElement = textElement.parentElement;
+  // We don't want to activate edit mode on checked off items
+  if (todoElement.classList.contains('todo-checked')) return;
+
+  const description = textElement.innerHTML;
 
   const editField = document.createElement('input');
   editField.type = 'text';
@@ -35,7 +38,7 @@ function toggleEditMode(textElement) {
 }
 
 // Event Listener to toggle edit modes
-document.querySelectorAll('.todo-unchecked .todo-description').forEach((el) => {
+document.querySelectorAll('.todo-description').forEach((el) => {
   el.addEventListener('click', () => toggleEditMode(el));
 });
 
