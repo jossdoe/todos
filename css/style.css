@@ -2,7 +2,7 @@
   --primary: #0074d9;
   --primary-faded: #0074d922;
   --primary-hover: #0066be;
-  --checked-bg: #00000022;
+  --checked-bg: #00000011;
   --body-bg: #fff;
   --font-color: #111;
   --input-background: #00000044;
@@ -124,7 +124,7 @@ article {
   font-weight: 700;
   line-height: 1.5;
   cursor: pointer;
-  transition: opacity 0.2s;
+  transition: opacity 0.2s, color 0.2s;
 }
 
 .todo-unchecked .todo-description:hover {
@@ -137,7 +137,7 @@ article {
 }
 
 .todo-checked .todo-description:hover {
-  opacity: 0.3;
+  color: #ff4136;
 }
 
 .expand {
