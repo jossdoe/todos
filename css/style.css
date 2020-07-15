@@ -381,13 +381,14 @@ article button:active {
   left: 0;
   right: 0;
   background-color: var(--overlay-bg);
+  color: var(--body-bg);
   z-index: 130;
   display: grid;
   place-items: center;
 }
 
 .confirm-dialog {
-  background-color: white;
+  background-color: var(--primary);
   border-radius: 6px;
   padding: 30px;
   min-width: 200px;
@@ -402,41 +403,39 @@ article button:active {
 
 .confirm-delete {
   border: none;
-  background-color: var(--primary);
-  color: var(--body-bg);
-  border: solid 2px transparent;
-  padding: 16px 32px;
+  background-color: var(--body-bg);
+  color: var(--primary);
+  padding: 18px 32px;
   border-radius: 6px;
   font-weight: 700;
-  transition: transform 0.2s, background-color 0.2s;
+  transition: transform 0.2s, opacity 0.2s;
 }
 
 .confirm-delete:hover {
-  background-color: var(--primary-hover);
+  opacity: 0.7;
 }
 
 .confirm-delete:active {
-  background-color: var(--primary-hover);
+  opacity: 0.7;
   transform: scale(0.9);
 }
 
 .cancel-delete {
   border: none;
-  background-color: var(--body-bg);
-  color: var(--primary);
-  border: solid 2px var(--primary);
-  padding: 16px 32px;
+  background-color: var(--primary);
+  color: var(--body-bg);
+  padding: 18px 32px;
   border-radius: 6px;
   font-weight: 700;
-  transition: transform 0.2s, opacity 0.2s;
+  transition: transform 0.2s, background-color 0.2s;
   margin-left: 10px;
 }
 
 .cancel-delete:hover {
-  opacity: 0.7;
+  background-color: var(--primary-hover);
 }
 
 .cancel-delete:active {
-  opacity: 0.7;
+  background-color: var(--primary-hover);
   transform: scale(0.9);
 }
