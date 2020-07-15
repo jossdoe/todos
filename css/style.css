@@ -1,15 +1,15 @@
 :root {
   --primary: #0074d9;
-  --primary-faded: #0074d922;
   --primary-hover: #0066be;
+  --primary-faded: #0074d922;
+  --body-bg: #fff;
+  --checked-bg: #00000011;
+  --overlay-bg: #00000033;
+  --font-color: #111;
+  --font-family: 'Nunito', sans-serif;
   --red: #ff4136;
   --secondary-btn-color: #00000088;
-  --checked-bg: #00000011;
-  --body-bg: #fff;
-  --font-color: #111;
   --input-background: #00000044;
-  --font-family: 'Nunito', sans-serif;
-  --overlay-bg: #00000033;
 }
 
 /* 

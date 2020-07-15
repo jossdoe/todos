@@ -1,20 +1,36 @@
-// # EVENT LISTENERS
-// Toggle Checked for all Todo icons
+// # DOM & EVENT LISTENERS
+const inp = document.querySelector('#overlay-input');
+
+// Toggle overlay functions
+document.querySelector('.add-todo').addEventListener('click', () => {
+  document.querySelector('.overlay-background').classList.remove('hide');
+});
+document
+  .querySelector('.cancel-overlay')
+  .addEventListener('click', canceloverlay);
+
+// Submit Todo by Button
+document.querySelector('.submit-overlay').addEventListener('click', addtodo);
+
+// Submit Todo by Enter
+inp.addEventListener('keyup', (e) => (e.keyCode === 13 ? addtodo() : null));
+
+// Toggle Checked for icons
 document.querySelectorAll('div.todo-icon').forEach((el) => {
   el.addEventListener('click', () => toggleChecked(el.parentElement));
 });
 
-// Toggle Edit Mode for all Todo descriptions
+// Edit Mode for descriptions
 document.querySelectorAll('.todo-description').forEach((el) => {
   el.addEventListener('click', () => toggleEditMode(el.parentElement));
 });
 
-// Toggle Delete Mode for all Todo descriptions
+// Delete Mode for descriptions
 document.querySelectorAll('.todo-description').forEach((el) => {
   el.addEventListener('click', () => toggleDeleteMode(el.parentElement));
 });
 
-// Delete method for all Trash Icons
+// Delete method for Trash
 document.querySelectorAll('.trash-icon').forEach((el) => {
   el.addEventListener('click', () => deleteItem(el.parentElement));
 });
@@ -36,6 +52,63 @@ document
   .addEventListener('click', toggleClearDialog);
 
 // # FUNCTIONS
+function canceloverlay() {
+  document.querySelector('.overlay-background').classList.add('hide');
+  inp.value = '';
+}
+
+function addtodo() {
+  if (inp.value === '') {
+    alert('please write something');
+    return;
+  }
+
+  if (inp.value.length > 120) {
+    alert('too long');
+    return;
+  }
+
+  // Todo Item
+  const article = document.createElement('article');
+  article.classList.add('todo-unchecked');
+
+  // Icon
+  const divt = document.createElement('div');
+  divt.classList.add('todo-icon');
+  divt.addEventListener('click', () => toggleChecked(divt.parentElement));
+  article.appendChild(divt);
+
+  // Icon Image
+  const img = document.createElement('img');
+  img.src = 'assets/checkmark.svg';
+  img.alt = 'Checkmark';
+  divt.appendChild(img);
+
+  // Description
+  const divb = document.createElement('div');
+  divb.classList.add('todo-description');
+  divb.textContent = inp.value;
+  divb.addEventListener('click', () => toggleEditMode(divb.parentElement));
+  divb.addEventListener('click', () => toggleDeleteMode(divb.parentElement));
+  article.appendChild(divb);
+
+  // Trash
+  const divtrash = document.createElement('div');
+  divtrash.classList.add('trash-icon');
+  divtrash.addEventListener('click', () => deleteItem(divtrash.parentElement));
+  article.appendChild(divtrash);
+
+  // Trash Image
+  const imgtrash = document.createElement('img');
+  imgtrash.src = 'assets/trash.svg';
+  imgtrash.alt = 'Trash';
+  divtrash.appendChild(imgtrash);
+
+  document.querySelector('main').appendChild(article);
+  document.querySelector('.overlay-background').classList.add('hide');
+  inp.value = '';
+}
+
 function toggleChecked(todoElement) {
   todoElement.classList.toggle('todo-checked');
   todoElement.classList.toggle('todo-unchecked');
