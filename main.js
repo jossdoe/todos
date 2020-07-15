@@ -1,17 +1,20 @@
-
+const inp=document.querySelector("#overlay-input");
 
 document.querySelector(".add-todo").addEventListener("click", () => {
     document.querySelector(".overlay-background").classList.remove("hide");
 })
 
-document.querySelector(".cancel-overlay").addEventListener("click", () => {
+document.querySelector(".cancel-overlay").addEventListener("click", (canceloverlay))
+
+function canceloverlay() {
     document.querySelector(".overlay-background").classList.add("hide");
-})
+    inp.value = "";
+}
+
 document.querySelector(".submit-overlay").addEventListener("click", (addtodo));
 
 function addtodo(){   
-    var inp=document.querySelector("#overlay-input");
-    
+   
     const article=document.createElement("article");
     article.classList.add("todo-unchecked");
 
