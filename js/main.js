@@ -59,12 +59,12 @@ function canceloverlay() {
 
 function addtodo() {
   if (inp.value === '') {
-    alert('please write something');
+    alert('Please write something.');
     return;
   }
 
   if (inp.value.length > 120) {
-    alert('too long');
+    alert('Too long. Max: 120 characters.');
     return;
   }
 
