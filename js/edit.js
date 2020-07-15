@@ -1,20 +1,20 @@
 // # EVENT LISTENERS
-// Toggle Checked for all Todo icons
+// Toggle Checked for icons
 document.querySelectorAll('div.todo-icon').forEach((el) => {
   el.addEventListener('click', () => toggleChecked(el.parentElement));
 });
 
-// Toggle Edit Mode for all Todo descriptions
+// Edit Mode for descriptions
 document.querySelectorAll('.todo-description').forEach((el) => {
   el.addEventListener('click', () => toggleEditMode(el.parentElement));
 });
 
-// Toggle Delete Mode for all Todo descriptions
+// Delete Mode for descriptions
 document.querySelectorAll('.todo-description').forEach((el) => {
   el.addEventListener('click', () => toggleDeleteMode(el.parentElement));
 });
 
-// Delete method for all Trash Icons
+// Delete method for Trash
 document.querySelectorAll('.trash-icon').forEach((el) => {
   el.addEventListener('click', () => deleteItem(el.parentElement));
 });
