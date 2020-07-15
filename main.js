@@ -11,11 +11,24 @@ function canceloverlay() {
     inp.value = "";
 }
 
+inp.addEventListener("onkeyup", (func));
+
 document.querySelector(".submit-overlay").addEventListener("click", (addtodo));
+
+function func(e){
+    alert("hello");
+if(e.keyCode === 13){
+    addtodo();
+}};
 
 function addtodo(){   
     if(inp.value === ""){
         alert("please write something");
+        return;
+    }
+
+    if(inp.value.length > 120){
+        alert("too long");
         return;
     }
 
