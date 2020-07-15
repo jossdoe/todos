@@ -14,7 +14,11 @@ function canceloverlay() {
 document.querySelector(".submit-overlay").addEventListener("click", (addtodo));
 
 function addtodo(){   
-   
+    if(inp.value === ""){
+        alert("please write something");
+        return;
+    }
+
     const article=document.createElement("article");
     article.classList.add("todo-unchecked");
 
@@ -32,8 +36,16 @@ function addtodo(){
     divb.textContent=inp.value;
     article.appendChild(divb);
 
+    const divtrash = document.createElement("div");
+    divtrash.classList.add("trash-icon");
+    article.appendChild(divtrash);
+    
+    const imgtrash = document.createElement("img");
+    imgtrash.src="assets/trash.svg";
+    imgtrash.alt="Checkmark";
+    divtrash.appendChild(imgtrash);
+
     document.querySelector("main").appendChild(article);
     document.querySelector(".overlay-background").classList.add("hide");
     inp.value = "";
-    return;
 };
