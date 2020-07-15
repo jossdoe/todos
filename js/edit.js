@@ -14,6 +14,11 @@ document.querySelectorAll('.todo-description').forEach((el) => {
   el.addEventListener('click', () => toggleDeleteMode(el.parentElement));
 });
 
+// Delete method for all Trash Icons
+document.querySelectorAll('.trash-icon').forEach((el) => {
+  el.addEventListener('click', () => deleteItem(el.parentElement));
+});
+
 // # FUNCTIONS
 function toggleChecked(todoElement) {
   todoElement.classList.toggle('todo-checked');
@@ -65,6 +70,9 @@ function saveEdit(todoElement) {
   const elTrashIcon = document.createElement('div');
   elTrashIcon.classList.add('trash-icon');
   elTrashIcon.innerHTML = '<img src="assets/trash.svg" alt="Checkmark" />';
+  elTrashIcon.addEventListener('click', () =>
+    deleteItem(elTrashIcon.parentElement)
+  );
 
   todoElement.innerHTML = '';
   todoElement.append(elTodoIcon);
@@ -76,4 +84,8 @@ function toggleDeleteMode(todoElement) {
   // We don't want to activate delete mode on active items
   if (todoElement && todoElement.classList.contains('todo-checked'))
     todoElement.classList.toggle('expand');
+}
+
+function deleteItem(todoElement) {
+  todoElement.remove();
 }
