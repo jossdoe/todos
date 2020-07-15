@@ -1,3 +1,4 @@
+// Replace content of Todo-element with field & button
 const toggleEditMode = (textElement) => {
   const description = textElement.innerHTML;
   const todoElement = textElement.parentElement;
@@ -14,6 +15,7 @@ const toggleEditMode = (textElement) => {
   todoElement.append(saveButton);
 };
 
-document.querySelectorAll('.todo-description').forEach((el) => {
+// Event Listener for all the unchecked descriptions
+document.querySelectorAll('.todo-unchecked .todo-description').forEach((el) => {
   el.addEventListener('click', () => toggleEditMode(el));
 });
