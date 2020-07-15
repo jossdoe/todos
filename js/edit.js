@@ -19,6 +19,22 @@ document.querySelectorAll('.trash-icon').forEach((el) => {
   el.addEventListener('click', () => deleteItem(el.parentElement));
 });
 
+// Clear List button
+document
+  .querySelector('.clear-list')
+  .addEventListener('click', toggleClearDialog);
+
+// Clear dialog: Confirm button
+document.querySelector('.confirm-delete').addEventListener('click', () => {
+  clearList();
+  toggleClearDialog();
+});
+
+// Clear dialog: Cancel button
+document
+  .querySelector('.cancel-delete')
+  .addEventListener('click', toggleClearDialog);
+
 // # FUNCTIONS
 function toggleChecked(todoElement) {
   todoElement.classList.toggle('todo-checked');
@@ -52,7 +68,7 @@ function saveEdit(todoElement) {
 
   const elTodoIcon = document.createElement('div');
   elTodoIcon.classList.add('todo-icon');
-  elTodoIcon.innerHTML = '<img src="assets/checkmark.svg" alt="Checkmark" />';
+  elTodoIcon.innerHTML = '<img src="assets/checkmark.svg" alt="Checkmark" />'; // dirty, we shouldn't do this
   elTodoIcon.addEventListener('click', () =>
     toggleChecked(elTodoIcon.parentElement)
   );
@@ -69,7 +85,7 @@ function saveEdit(todoElement) {
 
   const elTrashIcon = document.createElement('div');
   elTrashIcon.classList.add('trash-icon');
-  elTrashIcon.innerHTML = '<img src="assets/trash.svg" alt="Checkmark" />';
+  elTrashIcon.innerHTML = '<img src="assets/trash.svg" alt="Checkmark" />'; // ugh, so dirty
   elTrashIcon.addEventListener('click', () =>
     deleteItem(elTrashIcon.parentElement)
   );
@@ -88,4 +104,12 @@ function toggleDeleteMode(todoElement) {
 
 function deleteItem(todoElement) {
   todoElement.remove();
+}
+
+function toggleClearDialog() {
+  document.querySelector('.confirm-background').classList.toggle('hide');
+}
+
+function clearList() {
+  document.querySelector('main').innerHTML = '';
 }

@@ -33,7 +33,7 @@ button {
 }
 
 .hide {
-  display: none;
+  display: none !important;
 }
 
 /* 
@@ -347,7 +347,7 @@ article button:active {
 }
 
 /* 
- *  TODOS
+ *  CLEAR LIST
  */
 .confirm-background {
   position: fixed;
