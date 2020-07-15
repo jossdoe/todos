@@ -66,13 +66,20 @@ function toggleEditMode(todoElement) {
 function saveEdit(todoElement) {
   const inputValue = todoElement.querySelector('input').value;
 
+  // Icon Container
   const elTodoIcon = document.createElement('div');
   elTodoIcon.classList.add('todo-icon');
-  elTodoIcon.innerHTML = '<img src="assets/checkmark.svg" alt="Checkmark" />'; // dirty, we shouldn't do this
   elTodoIcon.addEventListener('click', () =>
     toggleChecked(elTodoIcon.parentElement)
   );
 
+  // Icon Image
+  const elIconImg = document.createElement('img');
+  elIconImg.src = 'assets/checkmark.svg';
+  elIconImg.alt = 'Checkmark';
+  elTodoIcon.append(elIconImg);
+
+  // Todo Description
   const elTodoDescription = document.createElement('div');
   elTodoDescription.classList.add('todo-description');
   elTodoDescription.innerHTML = inputValue;
@@ -83,12 +90,18 @@ function saveEdit(todoElement) {
     toggleDeleteMode(elTodoDescription.parentElement)
   );
 
+  // Trash Container
   const elTrashIcon = document.createElement('div');
   elTrashIcon.classList.add('trash-icon');
-  elTrashIcon.innerHTML = '<img src="assets/trash.svg" alt="Checkmark" />'; // ugh, so dirty
   elTrashIcon.addEventListener('click', () =>
     deleteItem(elTrashIcon.parentElement)
   );
+
+  // Trash Image
+  const elTrashImg = document.createElement('img');
+  elTrashImg.src = 'assets/trash.svg';
+  elTrashImg.alt = 'Trash';
+  elTrashIcon.append(elTrashImg);
 
   todoElement.innerHTML = '';
   todoElement.append(elTodoIcon);
