@@ -9,6 +9,7 @@
   --font-family: 'Nunito', sans-serif;
   --red: #ff4136;
   --secondary-btn-color: #00000088;
+  --secondary-btn-hover-bg: #00000008;
   --input-background: #00000044;
 }
 
@@ -67,6 +68,7 @@ main {
   padding: 114px 20px 40px;
   max-width: 650px;
   margin: 0 auto;
+  position: relative;
 }
 
 .clear-list {
@@ -79,15 +81,29 @@ main {
   border-radius: 6px;
   color: var(--secondary-btn-color);
   transition: background-color 0.2s, transform 0.2s;
+  box-shadow: 1px 2px 3px #00000022, 1px 2px 9px #00000022;
 }
 
 .clear-list:hover {
-  background-color: var(--checked-bg);
+  box-shadow: 1px 2px 3px #00000033, 1px 2px 9px #00000033;
 }
 
 .clear-list:active {
-  background-color: var(--checked-bg);
+  box-shadow: 1px 2px 3px #00000033, 1px 2px 9px #00000033;
   transform: scale(0.9);
+}
+
+main:empty::before {
+  content: 'Nothing to do 🤷‍♂️';
+  display: block;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 180px;
+}
+
+main:empty + .clear-list {
+  display: none;
 }
 
 /* 
