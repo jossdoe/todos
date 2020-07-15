@@ -65,7 +65,7 @@ header {
  *  MAIN
  */
 main {
-  padding: 114px 20px 40px;
+  padding: 90px 20px 40px;
   max-width: 650px;
   margin: 0 auto;
   position: relative;
@@ -318,6 +318,14 @@ article button:active {
   max-width: 400px;
 }
 
+.overlay-form h2 {
+  color: var(--body-bg);
+  font-weight: 700;
+  font-size: 2rem;
+  margin: 0 4px 15px;
+  text-align: center;
+}
+
 .overlay label {
   display: block;
   font-weight: 700;
@@ -340,6 +348,7 @@ article button:active {
   color: var(--body-bg);
   line-height: 1.8;
   font-size: 1rem;
+  box-shadow: inset 1px 1px 3px #00000033, inset 1px 1px 9px #00000033;
 }
 
 .submit-overlay {
