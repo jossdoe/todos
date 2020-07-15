@@ -293,20 +293,19 @@ article button:active {
   left: 50%;
   transform: translateX(-50%);
   border: none;
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
-  background-color: var(--primary);
-  color: var(--body-bg);
+  background-color: var(--body-bg);
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 1px 2px 3px #00000022, 1px 2px 9px #00000022;
-  transition: transform 0.2s, background-color 0.2s;
+  transition: transform 0.2s, opacity 0.2s;
 }
 
 .cancel-overlay:hover {
-  background-color: var(--primary-hover);
+  opacity: 0.8;
 }
 
 .cancel-overlay:active {
