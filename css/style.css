@@ -2,12 +2,14 @@
   --primary: #0074d9;
   --primary-faded: #0074d922;
   --primary-hover: #0066be;
+  --red: #ff4136;
+  --secondary-btn-color: #00000088;
   --checked-bg: #00000011;
   --body-bg: #fff;
   --font-color: #111;
   --input-background: #00000044;
   --font-family: 'Nunito', sans-serif;
-  --overlay-bg: var(--checked-bg);
+  --overlay-bg: #00000033;
 }
 
 /* 
@@ -62,9 +64,30 @@ header {
  *  MAIN
  */
 main {
-  padding: 114px 20px 20px;
+  padding: 114px 20px 40px;
   max-width: 650px;
   margin: 0 auto;
+}
+
+.clear-list {
+  background-color: transparent;
+  border: none;
+  font-weight: 700;
+  padding: 18px 24px;
+  display: block;
+  margin: 0 auto 200px;
+  border-radius: 6px;
+  color: var(--secondary-btn-color);
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.clear-list:hover {
+  background-color: var(--checked-bg);
+}
+
+.clear-list:active {
+  background-color: var(--checked-bg);
+  transform: scale(0.9);
 }
 
 /* 
@@ -137,7 +160,7 @@ article {
 }
 
 .todo-checked .todo-description:hover {
-  color: #ff4136;
+  color: var(--red);
 }
 
 .expand {
@@ -319,5 +342,77 @@ article button:active {
 }
 
 .submit-overlay:active {
+  opacity: 0.6;
+  transform: scale(0.9);
+}
+
+/* 
+ *  TODOS
+ */
+.confirm-background {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--overlay-bg);
+  z-index: 130;
+  display: grid;
+  place-items: center;
+}
+
+.confirm-dialog {
+  background-color: white;
+  border: solid 2px var(--primary);
+  border-radius: 6px;
+  padding: 30px;
+  min-width: 200px;
+  box-shadow: 1px 2px 3px #00000022, 1px 2px 9px #00000022;
+}
+
+.confirm-dialog p {
+  font-weight: 700;
+  margin-bottom: 30px;
+  font-size: 1.1rem;
+}
+
+.confirm-delete {
+  border: none;
+  background-color: var(--primary);
+  color: var(--body-bg);
+  border: solid 2px transparent;
+  padding: 16px 32px;
+  border-radius: 6px;
+  font-weight: 700;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.confirm-delete:hover {
+  background-color: var(--primary-hover);
+}
+
+.confirm-delete:active {
+  background-color: var(--primary-hover);
+  transform: scale(0.9);
+}
+
+.cancel-delete {
+  border: none;
+  background-color: var(--body-bg);
+  color: var(--primary);
+  border: solid 2px var(--primary);
+  padding: 16px 32px;
+  border-radius: 6px;
+  font-weight: 700;
+  transition: transform 0.2s, opacity 0.2s;
+  margin-left: 10px;
+}
+
+.cancel-delete:hover {
+  opacity: 0.7;
+}
+
+.cancel-delete:active {
+  opacity: 0.7;
   transform: scale(0.9);
 }
