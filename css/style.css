@@ -76,20 +76,20 @@ main {
   border: none;
   font-weight: 700;
   padding: 18px 24px;
+  border-radius: 26px;
   display: block;
   margin: 0 auto 200px;
-  border-radius: 6px;
   color: var(--secondary-btn-color);
-  transition: background-color 0.2s, transform 0.2s;
-  box-shadow: 1px 2px 3px #00000022, 1px 2px 9px #00000022;
+  transition: box-shadow 0.2s, transform 0.2s;
+  box-shadow: 1px 1px 3px #00000022, 1px 1px 9px #00000022;
 }
 
 .clear-list:hover {
-  box-shadow: 1px 2px 3px #00000033, 1px 2px 9px #00000033;
+  box-shadow: 1px 1px 3px #00000033, 1px 1px 9px #00000033;
 }
 
 .clear-list:active {
-  box-shadow: 1px 2px 3px #00000033, 1px 2px 9px #00000033;
+  box-shadow: 1px 1px 3px #00000033, 1px 1px 9px #00000033;
   transform: scale(0.9);
 }
 
