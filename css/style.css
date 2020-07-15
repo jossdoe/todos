@@ -363,7 +363,6 @@ article button:active {
 
 .confirm-dialog {
   background-color: white;
-  border: solid 2px var(--primary);
   border-radius: 6px;
   padding: 30px;
   min-width: 200px;
