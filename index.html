@@ -9,7 +9,7 @@
     />
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/style.css" />
-    <title>Document</title>
+    <title>todos</title>
   </head>
   <body>
     <!-- HEADER -->
@@ -50,6 +50,7 @@
         </div>
       </article>
     </main>
+    <button class="clear-list">Clear List</button>
 
     <!-- ADD BUTTON -->
     <button class="add-todo">
@@ -67,6 +68,15 @@
           <textarea name="overlay-input" id="overlay-input" rows="3"></textarea>
           <button class="submit-overlay">Save</button>
         </div>
+      </div>
+    </div>
+
+    <!-- DELETE CONFIRMATION -->
+    <div class="confirm-background hide">
+      <div class="confirm-dialog">
+        <p>Are you sure?</p>
+        <button class="confirm-delete">Clear List</button>
+        <button class="cancel-delete">Cancel</button>
       </div>
     </div>
     <script src="main.js">
