@@ -112,6 +112,7 @@ function addtodo() {
 function toggleChecked(todoElement) {
   todoElement.classList.toggle('todo-checked');
   todoElement.classList.toggle('todo-unchecked');
+  todoElement.classList.remove('expand');
 }
 
 function toggleEditMode(todoElement) {
