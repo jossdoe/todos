@@ -1,5 +1,21 @@
-// Toggle checked status of Todo
-const toggleChecked = (iconElement) => {
+// # EVENT LISTENERS
+// Toggle Checked for all Todo icons
+document.querySelectorAll('div.todo-icon').forEach((el) => {
+  el.addEventListener('click', () => toggleChecked(el));
+});
+
+// Toggle Edit Mode for all Todo descriptions
+document.querySelectorAll('.todo-description').forEach((el) => {
+  el.addEventListener('click', () => toggleEditMode(el));
+});
+
+// Toggle Delete Mode for all Todo descriptions
+document.querySelectorAll('.todo-description').forEach((el) => {
+  el.addEventListener('click', () => toggleDeleteMode(el));
+});
+
+// # FUNCTIONS
+function toggleChecked(iconElement) {
   const todoElement = iconElement.parentElement;
 
   if (todoElement.classList.contains('todo-checked')) {
@@ -9,14 +25,8 @@ const toggleChecked = (iconElement) => {
     todoElement.classList.remove('todo-unchecked');
     todoElement.classList.add('todo-checked');
   }
-};
+}
 
-// Event Listener for all icon elements on Todos
-document.querySelectorAll('div.todo-icon').forEach((el) => {
-  el.addEventListener('click', () => toggleChecked(el));
-});
-
-// Edit mode: Replace content of Todo-element with field & button
 function toggleEditMode(textElement) {
   const todoElement = textElement.parentElement;
   // We don't want to activate edit mode on checked off items
@@ -40,12 +50,6 @@ function toggleEditMode(textElement) {
   todoElement.append(saveButton);
 }
 
-// Event Listener to toggle edit modes
-document.querySelectorAll('.todo-description').forEach((el) => {
-  el.addEventListener('click', () => toggleEditMode(el));
-});
-
-// Take the input value and rebuild the todo after edit
 function saveEdit(todoElement) {
   const inputValue = todoElement.querySelector('input').value;
 
@@ -60,6 +64,9 @@ function saveEdit(todoElement) {
   elTodoDescription.addEventListener('click', () =>
     toggleEditMode(elTodoDescription)
   );
+  elTodoDescription.addEventListener('click', () =>
+    toggleDeleteMode(elTodoDescription)
+  );
 
   const elTrashIcon = document.createElement('div');
   elTrashIcon.classList.add('trash-icon');
@@ -69,4 +76,13 @@ function saveEdit(todoElement) {
   todoElement.append(elTodoIcon);
   todoElement.append(elTodoDescription);
   todoElement.append(elTrashIcon);
+}
+
+function toggleDeleteMode(textElement) {
+  const todoElement = textElement.parentElement;
+  console.log(textElement.parentElement);
+  // We don't want to activate delete mode on active items
+  if (todoElement.classList.contains('todo-unchecked')) return;
+
+  todoElement.classList.toggle('expand');
 }
