@@ -15,7 +15,7 @@ const toggleEditMode = (textElement) => {
   todoElement.append(saveButton);
 };
 
-// Event Listener for all the unchecked descriptions
+// Event Listener to toggle edit modes
 document.querySelectorAll('.todo-unchecked .todo-description').forEach((el) => {
   el.addEventListener('click', () => toggleEditMode(el));
 });
