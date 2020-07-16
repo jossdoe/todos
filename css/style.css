@@ -283,13 +283,14 @@ article button:active {
 }
 
 .overlay {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
   background-color: var(--primary);
   padding: 20px;
   z-index: var(--zid-overlay-addtodo);
+  transition: bottom 0.3s;
 }
 
 .cancel-overlay {
@@ -381,6 +382,7 @@ article button:active {
 
 .confirm-dialog {
   background-color: var(--primary);
+  color: var(--body-bg);
   border-radius: 6px;
   padding: 30px;
   min-width: 200px;
@@ -442,7 +444,7 @@ article button:active {
  *  HIDE CLASSES
  */
 .slide-down {
-  opacity: 0 !important;
+  bottom: -400px;
   pointer-events: none !important;
 }
 
