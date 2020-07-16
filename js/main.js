@@ -1,7 +1,10 @@
 // # DOM & EVENT LISTENERS
 // Toggle overlay functions
 document.querySelector('.add-todo').addEventListener('click', () => {
-  document.querySelector('.overlay-background').classList.remove('hide');
+  document
+    .querySelector('.overlay-background')
+    .classList.remove('opacity-zero');
+  document.querySelector('.overlay').classList.remove('slide-down');
 });
 document
   .querySelector('.cancel-overlay')
@@ -56,7 +59,8 @@ document
 
 // # FUNCTIONS
 function canceloverlay() {
-  document.querySelector('.overlay-background').classList.add('hide');
+  document.querySelector('.overlay-background').classList.add('opacity-zero');
+  document.querySelector('.overlay').classList.add('slide-down');
   document.querySelector('#overlay-input').value = '';
 }
 
@@ -110,7 +114,7 @@ function addtodo() {
   divtrash.appendChild(imgtrash);
 
   document.querySelector('main').appendChild(article);
-  document.querySelector('.overlay-background').classList.add('hide');
+  document.querySelector('.overlay-background').classList.add('hide-overlay');
   inp.value = '';
 }
 
@@ -209,7 +213,10 @@ function deleteItem(todoElement) {
 }
 
 function toggleClearDialog() {
-  document.querySelector('.confirm-background').classList.toggle('hide');
+  document
+    .querySelector('.overlay-background')
+    .classList.toggle('opacity-zero');
+  document.querySelector('.confirm-dialog').classList.toggle('opacity-zero');
 }
 
 function clearList() {
