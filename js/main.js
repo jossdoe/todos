@@ -142,6 +142,16 @@ function toggleEditMode(todoElement) {
 function saveEdit(todoElement) {
   const inputValue = todoElement.querySelector('input').value;
 
+  if (inputValue === '') {
+    alert('Please write something.');
+    return;
+  }
+
+  if (inputValue.length > 120) {
+    alert('Too long. Max: 120 characters.');
+    return;
+  }
+
   // Icon Container
   const elTodoIcon = document.createElement('div');
   elTodoIcon.classList.add('todo-icon');
