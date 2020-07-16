@@ -11,9 +11,12 @@ document
 document.querySelector('.submit-overlay').addEventListener('click', addtodo);
 
 // Submit Todo by Enter
-document
-  .querySelector('#overlay-input')
-  .addEventListener('keyup', (e) => (e.keyCode === 13 ? addtodo() : null));
+document.querySelector('#overlay-input').addEventListener('keydown', (e) => {
+  if (e.keyCode === 13) {
+    e.preventDefault();
+    addtodo();
+  }
+});
 
 // Toggle Checked for icons
 document.querySelectorAll('div.todo-icon').forEach((el) => {
