@@ -1,11 +1,9 @@
 // # DOM & EVENT LISTENERS
 // Toggle overlay functions
-document.querySelector('.add-todo').addEventListener('click', () => {
-  document.querySelector('.overlay-background').classList.remove('hide');
-});
+document.querySelector('.add-todo').addEventListener('click', showOverlay);
 document
   .querySelector('.cancel-overlay')
-  .addEventListener('click', canceloverlay);
+  .addEventListener('click', hideAndResetOverlay);
 
 // Submit Todo by Button
 document.querySelector('.submit-overlay').addEventListener('click', addtodo);
@@ -55,9 +53,17 @@ document
   .addEventListener('click', toggleClearDialog);
 
 // # FUNCTIONS
-function canceloverlay() {
-  document.querySelector('.overlay-background').classList.add('hide');
+function hideAndResetOverlay() {
+  document.querySelector('.overlay-background').classList.add('opacity-zero');
+  document.querySelector('.overlay').classList.add('slide-down');
   document.querySelector('#overlay-input').value = '';
+}
+
+function showOverlay() {
+  document
+    .querySelector('.overlay-background')
+    .classList.remove('opacity-zero');
+  document.querySelector('.overlay').classList.remove('slide-down');
 }
 
 function addtodo() {
@@ -110,8 +116,7 @@ function addtodo() {
   divtrash.appendChild(imgtrash);
 
   document.querySelector('main').appendChild(article);
-  document.querySelector('.overlay-background').classList.add('hide');
-  inp.value = '';
+  hideAndResetOverlay();
 }
 
 function toggleChecked(todoElement) {
@@ -209,7 +214,10 @@ function deleteItem(todoElement) {
 }
 
 function toggleClearDialog() {
-  document.querySelector('.confirm-background').classList.toggle('hide');
+  document
+    .querySelector('.overlay-background')
+    .classList.toggle('opacity-zero');
+  document.querySelector('.confirm-dialog').classList.toggle('opacity-zero');
 }
 
 function clearList() {

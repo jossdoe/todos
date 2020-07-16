@@ -59,28 +59,26 @@
       <img src="assets/plus.svg" alt="Checkmark" />
     </button>
 
-    <!-- OVERLAY -->
-    <div class="overlay-background hide">
-      <div class="overlay">
-        <button class="cancel-overlay">
-          <img src="assets/minus.svg" alt="Checkmark" />
-        </button>
-        <div class="overlay-form">
-          <h2>Add Todo</h2>
-          <textarea name="overlay-input" id="overlay-input" rows="3"></textarea>
-          <button class="submit-overlay">Save</button>
-        </div>
+    <!-- OVERLAYS -->
+    <div class="overlay-background opacity-zero"></div>
+
+    <div class="overlay slide-down">
+      <button class="cancel-overlay">
+        <img src="assets/minus.svg" alt="Checkmark" />
+      </button>
+      <div class="overlay-form">
+        <h2>Add Todo</h2>
+        <textarea name="overlay-input" id="overlay-input" rows="3"></textarea>
+        <button class="submit-overlay">Save</button>
       </div>
     </div>
 
-    <!-- DELETE CONFIRMATION -->
-    <div class="confirm-background hide">
-      <div class="confirm-dialog">
-        <p>Are you sure?</p>
-        <button class="confirm-delete">Clear</button>
-        <button class="cancel-delete">Cancel</button>
-      </div>
+    <div class="confirm-dialog opacity-zero">
+      <p>Are you sure?</p>
+      <button class="confirm-delete">Clear</button>
+      <button class="cancel-delete">Cancel</button>
     </div>
+
     <script src="js/main.js"></script>
   </body>
 </html>
