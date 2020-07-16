@@ -114,7 +114,8 @@ function addtodo() {
   divtrash.appendChild(imgtrash);
 
   document.querySelector('main').appendChild(article);
-  document.querySelector('.overlay-background').classList.add('hide-overlay');
+  document.querySelector('.overlay-background').classList.add('opacity-zero');
+  document.querySelector('.overlay').classList.add('slide-down');
   inp.value = '';
 }
 
