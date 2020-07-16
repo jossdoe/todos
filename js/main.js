@@ -1,6 +1,4 @@
 // # DOM & EVENT LISTENERS
-const inp = document.querySelector('#overlay-input');
-
 // Toggle overlay functions
 document.querySelector('.add-todo').addEventListener('click', () => {
   document.querySelector('.overlay-background').classList.remove('hide');
@@ -13,7 +11,9 @@ document
 document.querySelector('.submit-overlay').addEventListener('click', addtodo);
 
 // Submit Todo by Enter
-inp.addEventListener('keyup', (e) => (e.keyCode === 13 ? addtodo() : null));
+document
+  .querySelector('#overlay-input')
+  .addEventListener('keyup', (e) => (e.keyCode === 13 ? addtodo() : null));
 
 // Toggle Checked for icons
 document.querySelectorAll('div.todo-icon').forEach((el) => {
@@ -54,10 +54,12 @@ document
 // # FUNCTIONS
 function canceloverlay() {
   document.querySelector('.overlay-background').classList.add('hide');
-  inp.value = '';
+  document.querySelector('#overlay-input').value = '';
 }
 
 function addtodo() {
+  const inp = document.querySelector('#overlay-input');
+
   if (inp.value === '') {
     alert('Please write something.');
     return;
@@ -87,7 +89,7 @@ function addtodo() {
   // Description
   const divb = document.createElement('div');
   divb.classList.add('todo-description');
-  divb.textContent = inp.value;
+  divb.textContent = document.querySelector('#overlay-input').value;
   divb.addEventListener('click', () => toggleEditMode(divb.parentElement));
   divb.addEventListener('click', () => toggleDeleteMode(divb.parentElement));
   article.appendChild(divb);
