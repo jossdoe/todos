@@ -385,7 +385,7 @@ article button:active {
   color: var(--body-bg);
   border-radius: 6px;
   padding: 30px;
-  min-width: 200px;
+  min-width: 285px;
   box-shadow: 1px 2px 3px #00000022, 1px 2px 9px #00000022;
   transition: opacity 0.3s;
   z-index: var(--zid-overlay-confirm);
