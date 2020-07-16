@@ -165,6 +165,7 @@ article {
   cursor: pointer;
   transition: opacity 0.2s, color 0.2s;
   overflow: hidden;
+  word-break: break-word;
 }
 
 .todo-unchecked .todo-description:hover {
