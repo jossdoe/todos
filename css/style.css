@@ -164,6 +164,7 @@ article {
   line-height: 1.5;
   cursor: pointer;
   transition: opacity 0.2s, color 0.2s;
+  overflow: hidden;
 }
 
 .todo-unchecked .todo-description:hover {
