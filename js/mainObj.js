@@ -53,19 +53,19 @@ class TodoList {
     document.querySelector('.overlay').classList.remove('slide-down');
 
     if (mode === 'add') {
-      // Overlay Header = "Add Todo"
-      // Input Field: empty
-      // Name Event Listeners // Validation
-      // Event Listener on SaveButton: addTodo() / removeListeners
-      // Event Listener on Return: addTodo() / removeListeners
-      // function to remove event listeners
+      //! Overlay Header = "Add Todo"
+      //! Input Field: empty
+      //! Name Event Listeners // Validation
+      //! Event Listener on SaveButton: addTodo() / removeListeners
+      //! Event Listener on Return: addTodo() / removeListeners
+      //! function to remove event listeners
     } else if (mode === 'edit' && id) {
-      // Overlay Header = "Edit Todo"
-      // Input Field: TodoItem-title
-      // Name Event Listeners // Validation
-      // Event Listener on SaveButton: editTodo() / removeListeners
-      // Event Listener on Return: editTodo() / removeListeners
-      // function to remove event listeners
+      //! Overlay Header = "Edit Todo"
+      //! Input Field: TodoItem-title
+      //! Name Event Listeners // Validation
+      //! Event Listener on SaveButton: editTodo() / removeListeners
+      //! Event Listener on Return: editTodo() / removeListeners
+      //! function to remove event listeners
     } else {
       throw new Error('Error in showOverlay function');
     }
@@ -138,6 +138,19 @@ class TodoList {
     });
   }
 }
+
+/*
+ *  ### App (class)
+ *  constructor: this._TodoList = new TodoList([]); -> pass methods like props here if needed
+ *  constructor: this._initializeApp();
+ *  method: _initializeApp()
+ *    - Set up EventListeners for all the Components/Elements (Break them out as named private functions inside the class)
+ *        -> _listenClearListButton, _listenAddButton, _listenCancelOverlayAdd, _listenCancelOverlayEdit, _listenKeydownAdd,
+ *           _listenKeydownEdit, _listenSubmitAdd, _listenSubmitEdit, _listenSubmitDialog, _listenCancelDialog
+ *
+ *  ### showEditOverlay (method)
+ *  - use data-attribute to store/get the id of the current item that's been edited in/from the HTML
+ */
 
 // DOM OPERATIONS
 const App = new TodoList();
