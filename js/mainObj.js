@@ -1,6 +1,6 @@
 class TodoItem {
-  constructor(id, title, done = false) {
-    this._id = id;
+  constructor(title, done = false) {
+    this._id = Math.floor(Math.random() * (99999 - 1) + 1);
     this._title = title;
     this._done = done;
     this._createdDate = new Date();
@@ -19,73 +19,32 @@ class TodoItem {
 class TodoList {
   constructor(items = []) {
     this._items = items;
+    this.render();
   }
 
   addTodo(title) {
-    this._items = [...this._items, new TodoItem(this._items.length, title)];
+    this._items = [...this._items, new TodoItem(title)];
     this.render();
   }
 
   editTodo(id, title) {
-    this._items.find((item) => item.id === id).editTitle(title);
+    this._items.find((item) => item._id === parseInt(id)).editTitle(title);
     this.render();
   }
 
   toggleDone(id) {
-    this._items.find((item) => item.id === id).toggleDone();
+    this._items.find((item) => item._id === parseInt(id)).toggleDone();
     this.render();
   }
 
   deleteTodo(id) {
-    this._items = this._items.filter((item) => item.id !== id);
+    this._items = this._items.filter((item) => item._id !== id);
     this.render();
   }
 
   clearList() {
     this._items = [];
     this.render();
-  }
-
-  showOverlay(mode, id) {
-    document
-      .querySelector('.overlay-background')
-      .classList.remove('opacity-zero');
-    document.querySelector('.overlay').classList.remove('slide-down');
-
-    if (mode === 'add') {
-      //! Overlay Header = "Add Todo"
-      //! Input Field: empty
-      //! Name Event Listeners // Validation
-      //! Event Listener on SaveButton: addTodo() / removeListeners
-      //! Event Listener on Return: addTodo() / removeListeners
-      //! function to remove event listeners
-    } else if (mode === 'edit' && id) {
-      //! Overlay Header = "Edit Todo"
-      //! Input Field: TodoItem-title
-      //! Name Event Listeners // Validation
-      //! Event Listener on SaveButton: editTodo() / removeListeners
-      //! Event Listener on Return: editTodo() / removeListeners
-      //! function to remove event listeners
-    } else {
-      throw new Error('Error in showOverlay function');
-    }
-  }
-
-  hideOverlay() {
-    // Clear input field
-    // Apply classes
-  }
-
-  showDialog() {
-    document
-      .querySelector('.overlay-background')
-      .classList.remove('opacity-zero');
-    document.querySelector('.confirm-dialog').classList.remove('opacity-zero');
-  }
-
-  hideDialog() {
-    document.querySelector('.overlay-background').classList.add('opacity-zero');
-    document.querySelector('.confirm-dialog').classList.add('opacity-zero');
   }
 
   render() {
@@ -98,12 +57,14 @@ class TodoList {
     this._items.forEach((item) => {
       // Todo Item
       const article = document.createElement('article');
-      article.classList.add('todo-unchecked');
+      article.classList.add(item._done ? 'todo-checked' : 'todo-unchecked');
 
       // Icon
       const divt = document.createElement('div');
       divt.classList.add('todo-icon');
-      divt.addEventListener('click', () => this.toggleDone(item._id));
+      divt.addEventListener('click', () => {
+        this.toggleDone(item._id);
+      });
       article.appendChild(divt);
 
       // Icon Image
@@ -115,17 +76,16 @@ class TodoList {
       // Description
       const divb = document.createElement('div');
       divb.classList.add('todo-description');
-      divb.textContent = item.title;
-      divb.addEventListener('click', () => toggleEditMode(divb.parentElement));
+      divb.textContent = item._title;
       divb.addEventListener('click', () =>
-        toggleDeleteMode(divb.parentElement)
+        this._showEditOverlay(item._id, item._title)
       );
       article.appendChild(divb);
 
       // Trash
       const divtrash = document.createElement('div');
       divtrash.classList.add('trash-icon');
-      divtrash.addEventListener('click', () => this.deleteItem(item.id));
+      // divtrash.addEventListener('click', () => this.deleteItem(item._id));
       article.appendChild(divtrash);
 
       // Trash Image
@@ -137,93 +97,185 @@ class TodoList {
       document.querySelector('main').appendChild(article);
     });
   }
+
+  _showEditOverlay(id, inputValue) {
+    const overlayNode = document.querySelector('.overlay-edit');
+    overlayNode.setAttribute('data-id', id);
+
+    const inputFieldNode = document.getElementById('overlay-edit-input');
+    inputFieldNode.value = inputValue;
+
+    document
+      .querySelector('.overlay-background')
+      .classList.remove('opacity-zero');
+    overlayNode.classList.remove('slide-down');
+  }
 }
 
-/*
- *  ### App (class)
- *  constructor: this._TodoList = new TodoList([]); -> pass methods like props here if needed
- *  constructor: this._initializeApp();
- *  method: _initializeApp()
- *    - Set up EventListeners for all the Components/Elements (Break them out as named private functions inside the class)
- *        -> _listenClearListButton, _listenAddButton, _listenCancelOverlayAdd, _listenCancelOverlayEdit, _listenKeydownAdd,
- *           _listenKeydownEdit, _listenSubmitAdd, _listenSubmitEdit, _listenSubmitDialog, _listenCancelDialog
- *
- *  ### showEditOverlay (method)
- *  - use data-attribute to store/get the id of the current item that's been edited in/from the HTML
- */
+class App {
+  constructor(items = []) {
+    this._TodoList = new TodoList(items);
+    this._initializeApp();
+  }
 
-// DOM OPERATIONS
-const App = new TodoList();
+  _initializeApp() {
+    this._listenShowDialog();
+    this._listenSubmitDialog();
+    this._listenCancelDialog();
+    this._listenAddButton();
+    this._listenSubmitAdd();
+    this._listenKeydownAdd();
+    this._listenCancelAddOverlay();
+    this._listenSubmitEdit();
+    this._listenKeydownEdit();
+    this._listenCancelEditOverlay();
+  }
 
-// Toggle overlay functions
-document.querySelector('.add-todo').addEventListener('click', App.showOverlay);
-document
-  .querySelector('.cancel-overlay')
-  .addEventListener('click', App.hideOverlay);
+  _listenShowDialog() {
+    document.querySelector('.clear-list').addEventListener('click', () => {
+      document
+        .querySelector('.overlay-background')
+        .classList.remove('opacity-zero');
+      document
+        .querySelector('.confirm-dialog')
+        .classList.remove('opacity-zero');
+    });
+  }
 
-// Clear List button
-document.querySelector('.clear-list').addEventListener('click', App.showDialog);
+  _listenSubmitDialog() {
+    document.querySelector('.confirm-delete').addEventListener('click', () => {
+      this._TodoList.clearList();
+      document
+        .querySelector('.overlay-background')
+        .classList.add('opacity-zero');
+      document.querySelector('.confirm-dialog').classList.add('opacity-zero');
+    });
+  }
 
-// Clear dialog: Confirm button
-document.querySelector('.confirm-delete').addEventListener('click', () => {
-  App.clearList();
-  App.hideDialog();
-});
+  _listenCancelDialog() {
+    document.querySelector('.cancel-delete').addEventListener('click', () => {
+      document
+        .querySelector('.overlay-background')
+        .classList.add('opacity-zero');
+      document.querySelector('.confirm-dialog').classList.add('opacity-zero');
+    });
+  }
 
-// Clear dialog: Cancel button
-document
-  .querySelector('.cancel-delete')
-  .addEventListener('click', App.hideDialog);
+  _listenAddButton() {
+    document.querySelector('.add-todo').addEventListener('click', () => {
+      document
+        .querySelector('.overlay-background')
+        .classList.remove('opacity-zero');
+      document.querySelector('.overlay-add').classList.remove('slide-down');
+    });
+  }
 
-// FUNCTIONS
-function toggleEditMode(todoElement) {
-  const description = todoElement.querySelector('.todo-description').innerHTML;
+  _listenSubmitAdd() {
+    document
+      .querySelector('.overlay-add .submit-overlay')
+      .addEventListener('click', (e) => {
+        e.preventDefault();
+        const inputField = document.getElementById('overlay-add-input');
+        this._TodoList.addTodo(inputField.value);
+        inputField.value = '';
+        document
+          .querySelector('.overlay-background')
+          .classList.add('opacity-zero');
+        document.querySelector('.overlay-add').classList.add('slide-down');
+      });
+  }
 
-  // We don't want to activate edit mode on checked off items
-  if (todoElement.classList.contains('todo-checked')) return;
+  _listenKeydownAdd() {
+    const inputField = document.getElementById('overlay-add-input');
+    inputField.addEventListener('keydown', (e) => {
+      if (e.key !== 'Enter') return;
 
-  const editField = document.createElement('input');
-  editField.type = 'text';
-  editField.value = description;
-  editField.addEventListener('keydown', (e) => {
-    if (e.code === 'Enter') saveEdit(todoElement);
-  });
+      e.preventDefault();
+      this._TodoList.addTodo(inputField.value);
+      inputField.value = '';
 
-  const saveButton = document.createElement('button');
-  saveButton.innerHTML = 'Save';
-  saveButton.addEventListener('click', () => saveEdit(todoElement));
+      document
+        .querySelector('.overlay-background')
+        .classList.add('opacity-zero');
+      document.querySelector('.overlay-add').classList.add('slide-down');
+    });
+  }
 
-  todoElement.innerHTML = '';
-  todoElement.append(editField);
-  todoElement.append(saveButton);
+  _listenCancelAddOverlay() {
+    document
+      .querySelector('.overlay-add .cancel-overlay')
+      .addEventListener('click', () => {
+        document
+          .querySelector('.overlay-background')
+          .classList.add('opacity-zero');
+        document.querySelector('.overlay-add').classList.add('slide-down');
+
+        document.getElementById('overlay-add-input').value = '';
+      });
+  }
+
+  _listenSubmitEdit() {
+    document
+      .querySelector('.overlay-edit .submit-overlay')
+      .addEventListener('click', (e) => {
+        e.preventDefault();
+
+        const overlayNode = document.querySelector('.overlay-edit');
+        const todoId = overlayNode.dataset.id;
+
+        const inputField = document.getElementById('overlay-edit-input');
+        const inputValue = inputField.value;
+
+        this._TodoList.editTodo(todoId, inputValue);
+
+        document
+          .querySelector('.overlay-background')
+          .classList.add('opacity-zero');
+        document.querySelector('.overlay-edit').classList.add('slide-down');
+
+        inputField.value = '';
+      });
+  }
+
+  _listenKeydownEdit() {
+    document
+      .querySelector('.overlay-edit .submit-overlay')
+      .addEventListener('keydown', (e) => {
+        if (e.keyCode !== 13) return;
+
+        e.preventDefault();
+
+        const overlayNode = document.querySelector('.overlay-edit');
+        const todoId = overlayNode.dataset.id;
+
+        const inputField = document.getElementById('overlay-edit-input');
+        const inputValue = inputField.value;
+
+        this._TodoList.editTodo(todoId, inputValue);
+
+        document
+          .querySelector('.overlay-background')
+          .classList.add('opacity-zero');
+        document.querySelector('.overlay-edit').classList.add('slide-down');
+
+        inputField.value = '';
+      });
+  }
+
+  _listenCancelEditOverlay() {
+    document
+      .querySelector('.overlay-edit .cancel-overlay')
+      .addEventListener('click', () => {
+        document
+          .querySelector('.overlay-background')
+          .classList.add('opacity-zero');
+        document.querySelector('.overlay-edit').classList.add('slide-down');
+      });
+  }
 }
 
-function toggleDeleteMode(todoElement) {
-  // We don't want to activate delete mode on active items
-  if (todoElement && todoElement.classList.contains('todo-checked'))
-    todoElement.classList.toggle('expand');
-}
-
-function hideAndResetOverlay() {
-  document.querySelector('.overlay-background').classList.add('opacity-zero');
-  document.querySelector('.overlay').classList.add('slide-down');
-  document.querySelector('#overlay-input').value = '';
-}
-
-function showOverlay() {
-  document
-    .querySelector('.overlay-background')
-    .classList.remove('opacity-zero');
-  document.querySelector('.overlay').classList.remove('slide-down');
-}
-
-function saveEdit(todoElement) {
-  // TODO
-}
-
-function toggleClearDialog() {
-  document
-    .querySelector('.overlay-background')
-    .classList.toggle('opacity-zero');
-  document.querySelector('.confirm-dialog').classList.toggle('opacity-zero');
-}
+const application = new App([
+  new TodoItem('Step One: Eat all the candy'),
+  new TodoItem('Step Two: ?'),
+  new TodoItem('Step Three: Profit')
+]);
