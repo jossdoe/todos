@@ -1,3 +1,4 @@
+// ### CLASSES
 class TodoItem {
   constructor(title, done = false) {
     this._id = Math.floor(Math.random() * (99999 - 1) + 1);
@@ -50,6 +51,7 @@ class TodoList {
   render() {
     document.querySelector('main').innerHTML = '';
 
+    // TODO: SORT TODO ITEMS BY STATUS AND DATE
     // Sort 1: Done / Not Done
     // Sort 2: Not done -> createdDate
     // Sort 3: Done -> completedDate
@@ -175,9 +177,11 @@ class App {
       .querySelector('.overlay-add .submit-overlay')
       .addEventListener('click', (e) => {
         e.preventDefault();
+
         const inputField = document.getElementById('overlay-add-input');
         this._TodoList.addTodo(inputField.value);
         inputField.value = '';
+
         document
           .querySelector('.overlay-background')
           .classList.add('opacity-zero');
@@ -191,6 +195,7 @@ class App {
       if (e.key !== 'Enter') return;
 
       e.preventDefault();
+
       this._TodoList.addTodo(inputField.value);
       inputField.value = '';
 
@@ -241,6 +246,7 @@ class App {
     document
       .querySelector('.overlay-edit .submit-overlay')
       .addEventListener('keydown', (e) => {
+        // Only run the callback on enter key
         if (e.keyCode !== 13) return;
 
         e.preventDefault();
@@ -274,6 +280,7 @@ class App {
   }
 }
 
+// START APP
 const application = new App([
   new TodoItem('Step One: Eat all the candy'),
   new TodoItem('Step Two: ?'),
